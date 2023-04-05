@@ -17,9 +17,13 @@ enum CollisionType: UInt32 {
 class GameScene: SKScene {
     let player = SKSpriteNode(imageNamed: "player") //creates player node
     
+    let waves = Bundle.main.decode([Wave].self, from: "waves.json") //gives array of waves from json file
+    let enemyTyoes = Bundle.main.decode([EnemyType].self, from: "enemy-types.json")
+    
     override func didMove(to view: SKView) {
-        if let particles = SKEffectNode(fileNamed: "Starfield"){ //adds particles of starfield to screen
-            particles.position = CGPoint(x: 0, y: frame.maxY + 500)
+        if let particles = SKEmitterNode(fileNamed: "Starfield"){ //adds particles of starfield to screen
+            particles.position = CGPoint(x: 0, y: frame.maxY)
+            particles.advanceSimulationTime(10) // fills screen with space stuff before start
             particles.zPosition = -1 // make particles appear in background layer
             addChild(particles)
         }
