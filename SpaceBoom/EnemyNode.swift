@@ -11,15 +11,17 @@ class EnemyNode: SKSpriteNode {
     var type: EnemyType
     var lastFireTime: Double = 0
     var shields: Int
+    var enemySize: CGSize
     
-    init(type: EnemyType, startPosition: CGPoint, xOffset: CGFloat, moveStraight: Bool) {
+    init(type: EnemyType, startPosition: CGPoint, xOffset: CGFloat, moveStraight: Bool, size: CGSize) {
         self.type = type
         shields = type.shields
+        self.enemySize = size
         
         let texture = SKTexture(imageNamed: type.name)
         super.init(texture: texture, color: .white, size: texture.size())
         
-        physicsBody = SKPhysicsBody(texture: texture, size: texture.size())
+        physicsBody = SKPhysicsBody(texture: texture, size: enemySize)
         physicsBody?.categoryBitMask = CollisionType.enemy.rawValue
         physicsBody?.collisionBitMask = CollisionType.player.rawValue | CollisionType.playerWeapon.rawValue
         physicsBody?.contactTestBitMask = CollisionType.player.rawValue | CollisionType.playerWeapon.rawValue
@@ -36,12 +38,12 @@ class EnemyNode: SKSpriteNode {
     
     func configureMovement(_ moveStraight: Bool) {
         let path = UIBezierPath()
-        path.move(to: .zero)
+        path.move(to: CGPoint(x: 0, y: frame.maxY * 2))
         
         if moveStraight {
-            path.addLine(to: CGPoint(x: -10000, y: 0))
+            path.addLine(to: CGPoint(x: 0, y: frame.minY * 2))
         } else {
-            path.addCurve(to: CGPoint(x: -3500, y:0), controlPoint1: CGPoint(x: 0, y: -position.y * 4), controlPoint2: CGPoint(x: -1000, y: -position.y))
+            path.addCurve(to: CGPoint(x: 0, y: -1000), controlPoint1: CGPoint(x: 0, y: 0), controlPoint2: CGPoint(x: 0, y: -10))
         }
         
         let movement = SKAction.follow(path.cgPath, asOffset: true, orientToPath: true, speed: type.speed)
