@@ -28,6 +28,7 @@ class GameViewController: UIViewController {
             
             view.showsFPS = true
             view.showsNodeCount = true
+            view.showsPhysics = true  // draws line about physic object in app
         }
     }
 

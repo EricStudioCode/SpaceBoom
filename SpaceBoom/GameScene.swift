@@ -7,6 +7,13 @@
 
 import SpriteKit
 
+enum CollisionType: UInt32 {
+    case player = 1
+    case playerWeapon = 2
+    case enemy = 4
+    case enemyWeapon = 8
+}
+
 class GameScene: SKScene {
     let player = SKSpriteNode(imageNamed: "player") //creates player node
     
@@ -21,6 +28,12 @@ class GameScene: SKScene {
         player.position.y = frame.minY + 25
         player.zPosition = 1 // makes sure player visual is above the background layer
         addChild(player) //adds player to screen
-        player.scale(to: CGSize(width: 40, height: 60)) // player size
+        player.size = CGSize(width: 40, height: 60) // scale player size
+        
+        player.physicsBody = SKPhysicsBody(texture: player.texture!, size: player.size) // blue line around player, that is used for collision
+        player.physicsBody?.categoryBitMask = CollisionType.player.rawValue //describes category what type player is
+        player.physicsBody?.collisionBitMask = CollisionType.enemy.rawValue | CollisionType.enemyWeapon.rawValue //describes what types of collision we have to care about, adds up to 12, that combo cannot be added through the other enums, thats why we use the power of 2
+        player.physicsBody?.contactTestBitMask  = CollisionType.enemy.rawValue | CollisionType.enemyWeapon.rawValue // what types will allert us at collision, else it will notice us about all collision
+        player.physicsBody?.isDynamic = false // ignore gravity for players body
     }
 }
