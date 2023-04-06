@@ -10,7 +10,7 @@ import SpriteKit
 struct Wave: Codable {
     struct WaveEnemy: Codable {
         let position: Int
-        let xOffset: CGFloat
+        let yOffset: CGFloat
         let moveStraight: Bool
     }
     

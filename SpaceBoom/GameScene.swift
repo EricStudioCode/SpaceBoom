@@ -24,7 +24,7 @@ class GameScene: SKScene {
     var levelNumber = 0
     var waveNumber = 0
     
-    let positions = Array(stride(from: -20, through: 20, by: 5))
+    let positions = Array(stride(from: -80, through: 80, by: 20))
     
     override func didMove(to view: SKView) {
         physicsWorld.gravity = .zero
@@ -51,21 +51,28 @@ class GameScene: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         for child in children {
-            if child.frame.maxX < 0 {
+            if child.frame.minY < 0 {
                 if !frame.intersects(child.frame) {
                     child.removeFromParent()
                 }
             }
         }
-        
+
         let activeEnemies = children.compactMap { $0 as? EnemyNode }
-        
+
         if activeEnemies.isEmpty {
             createWave()
         }
     }
     
     func createWave() {
+        print(frame.origin.x)
+        print(frame.origin.y)
+        print(frame.width)
+        print(frame.height)
+        print(frame.maxY)
+        print(frame.maxX)
+        print(frame.minY)
         guard isPlayerAlive else { return }
         
         if waveNumber == waves.count {
@@ -79,19 +86,19 @@ class GameScene: SKScene {
         let maximumEnemyType = min(enemyTypes.count, levelNumber + 1)
         let enemyType = Int.random(in: 0..<maximumEnemyType)
         
-        let enemyOffsetX: CGFloat = 5
-        let enemyStartX = 0
+        let enemyOffsetY: CGFloat = 5
+        let enemyStartY = 200
         
         if currentWave.enemies.isEmpty{
             for (index, position) in positions.shuffled().enumerated() {
-                let enemy = EnemyNode(type: enemyTypes[enemyType], startPosition: CGPoint(x: position, y: 100), xOffset: enemyOffsetX * CGFloat(index * 3), moveStraight: true, size: player.size)
-                enemy.size = player.size
+                let enemy = EnemyNode(type: enemyTypes[enemyType], startPosition: CGPoint(x: -position, y: enemyStartY), yOffset: enemyOffsetY * CGFloat(index * 3), moveStraight: true, size: CGSize(width: 20, height: 30))
+                enemy.size = CGSize(width: 20, height: 30)
                 addChild(enemy)
             }
         } else {
             for enemy in currentWave.enemies {
-                let node = EnemyNode(type: enemyTypes[enemyType], startPosition: CGPoint(x: positions[enemy.position], y: 100 ), xOffset: enemyOffsetX * enemyOffsetX, moveStraight: enemy.moveStraight, size: player.size)
-                node.size = player.size
+                let node = EnemyNode(type: enemyTypes[enemyType], startPosition: CGPoint(x: positions[enemy.position], y: enemyStartY), yOffset: enemyOffsetY * enemyOffsetY, moveStraight: enemy.moveStraight, size: CGSize(width: 20, height: 30))
+                node.size = CGSize(width: 20, height: 30)
                 addChild(node)
             }
         }
