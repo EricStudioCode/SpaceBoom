@@ -21,6 +21,7 @@
 		049296C129DD9F48004BCC05 /* wave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049296C029DD9F48004BCC05 /* wave.swift */; };
 		049296C329DDA056004BCC05 /* Bundle-Decoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049296C229DDA056004BCC05 /* Bundle-Decoding.swift */; };
 		049296C529DDA376004BCC05 /* EnemyNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049296C429DDA376004BCC05 /* EnemyNode.swift */; };
+		04C149D029E0819B0009DB66 /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 04C149CF29E0819B0009DB66 /* Explosion.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		049296C029DD9F48004BCC05 /* wave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wave.swift; sourceTree = "<group>"; };
 		049296C229DDA056004BCC05 /* Bundle-Decoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle-Decoding.swift"; sourceTree = "<group>"; };
 		049296C429DDA376004BCC05 /* EnemyNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyNode.swift; sourceTree = "<group>"; };
+		04C149CF29E0819B0009DB66 /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explosion.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 				041303C729DAACB600D24924 /* AppDelegate.swift */,
 				041303C929DAACB600D24924 /* GameScene.sks */,
 				041303CD29DAACB600D24924 /* GameScene.swift */,
+				04C149CF29E0819B0009DB66 /* Explosion.sks */,
 				049296C429DDA376004BCC05 /* EnemyNode.swift */,
 				049296BE29DD9EEC004BCC05 /* EnemyType.swift */,
 				049296C029DD9F48004BCC05 /* wave.swift */,
@@ -152,6 +155,7 @@
 				041303CA29DAACB600D24924 /* GameScene.sks in Resources */,
 				049296B929DD7587004BCC05 /* Starfield.sks in Resources */,
 				041303D529DAACB800D24924 /* Assets.xcassets in Resources */,
+				04C149D029E0819B0009DB66 /* Explosion.sks in Resources */,
 				049296BC29DD9B5A004BCC05 /* waves.json in Resources */,
 				041303D829DAACB800D24924 /* LaunchScreen.storyboard in Resources */,
 			);
